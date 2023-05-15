@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<meta name="keywords" content="Pivot points calculator, calculate pivot points, calculating pivot points, pivot calculator, pivot points, ">
+<meta name="description" content="Online pivot points calculator to find pivot points for forex and trading commodities and bonds. It can be calculated for any investment security that has a high, low and close price in any time period.">
+<!-- main css -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>حاسبة الدعم والمقاومة</title>
+  <style>
+      body {
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .calculator {
+        background-color: #f5f5f5;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      h2 {
+        color: #555555;
+      }
+
+      label {
+        margin-right: 10px;
+        color: #555555;
+      }
+
+      input[type="number"] {
+        padding: 5px;
+        border: none;
+        text-align: center;
+        width: 100px;
+        background-color: #eeeeee;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #supportResult {
+        margin-top: 20px;
+        color: #555555;
+        text-align: center;
+      }
+
+      #resistanceResult {
+        margin-top: 20px;
+        color: #555555;
+        text-align: center;
+      }
+
+      #pivotResult {
+        margin-top: 20px;
+        color: #555555;
+        text-align: center;
+      }
+
+      #chartContainer {
+        margin-top: 40px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    </style>
+</head>
+
+<body>
+<div class="calculator">
+  <h2>حاسبة الدعم والمقاومة</h2>
+
+  <label for="previousLow">أدنى سعر سابق:</label>
+  <input type="number" id="previousLow">
+  <br>
+  <label for="previousHigh">أعلى سعر سابق:</label>
+  <input type="number" id="previousHigh">
+  <br>
+  <label for="currentPrice">السعر الحالي:</label>
+  <input type="number" id="currentPrice">
+  <br>
+  <button onclick="calculateSupportAndResistance()">حساب</button>
+
+  <div id="supportResult"></div>
+  <div id="resistanceResult"></div>
+  <div id="pivotResult"></div>
+
+  <div id="chartContainer">
+    <canvas id="lineChart"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+      function calculateSupportAndResistance() {
+        let previousLow = parseFloat(document.getElementById('previousLow').value);
+        let previousHigh = parseFloat(document.getElementById('previousHigh').value);
+        let currentPrice = parseFloat(document.getElementById('currentPrice').value);
+
+        let support1 = previousLow * 2 - previousHigh;
+        let resistance1 = previousHigh * 2 - previousLow;
+
+        let support2 = previousLow * 3 - previousHigh * 2;
+        let resistance2 = previousHigh * 3 - previousLow * 2;
+
+        let support3 = previousLow * 4 - previousHigh * 3;
+        let resistance3 = previousHigh * 4 - previousLow * 3;
+
+        let pivot = (previousLow + previousHigh) / 2;
+
+        document.getElementById('supportResult').innerHTML =
+          'مستوى الدعم الأول: ' + support1.toFixed(2) + '<br>' +
+          'مستوى الدعم الثاني: ' + support2.toFixed(2) + '<br>' +
+          'مستوى الدعم الثالث: ' + support3.toFixed(2);
+        document.getElementById('pivotResult').innerHTML =
+          'نقطة الارتكاز: ' + pivot.toFixed(2);
+        document.getElementById('resistanceResult').innerHTML =
+          'مستوى المقاومة الأول: ' + resistance1.toFixed(2) + '<br>' +
+          'مستوى المقاومة الثاني: ' + resistance2.toFixed(2) + '<br>' +
+          'مستوى المقاومة الثالث: ' + resistance3.toFixed(2);
+
+        // Create a line chart
+        let ctx = document.getElementById('lineChart').getContext('2d');
+        let lineChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['الدعم الأول', 'الدعم الثاني', 'الدعم الثالث', 'الارتكاز', 'المقاومة الأولى', 'المقاومة الثانية', 'المقاومة الثالثة', 'السعر الحالي'],
+            datasets: [{
+              label: 'مستويات الدعم والمقاومة',
+              data: [support1.toFixed(2), support2.toFixed(2), support3.toFixed(2), pivot.toFixed(2), resistance1.toFixed(2), resistance2.toFixed(2), resistance3.toFixed(2), currentPrice.toFixed(2)],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 2,
+              pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+              pointRadius: 4,
+              pointHoverRadius: 6,
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: false,
+                ticks: {
+                  precision: 2
+                }
+              }
+            }
+          }
+        });
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>حاسبة الأرباح والخسائر</title>
+<style>
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.increase {
+  color: green;
+}
+
+.profit {
+  background-color: green;
+  color: white;
+}
+
+.loss {
+  background-color: red;
+  color: white;
+}
+
+.net-profit-loss {
+  color: blue;
+}
+</style>
+<script>
+function calculateProfitLoss() {
+    var totalShares = parseInt(document.getElementById("totalShares").value);
+    var purchasePrice = parseFloat(document.getElementById("purchasePrice").value);
+    
+    var table = "<table><tr><th class='increase'>نسبة الصعود</th><th>سعر السهم</th><th>الربح المتوقع</th><th class='net-profit-loss'>صافي الربح/الخسائر</th><th>نسبة النزول</th><th>سعر السهم</th><th class='loss'>الخسارة المتوقعة</th></tr>";
+    for (var i = 1; i <= 10; i++) {
+        var increasePercentage = i;
+        var decreasePercentage = i;
+        
+        var increasePrice = (purchasePrice * (1 + increasePercentage/100)).toFixed(2);
+        var decreasePrice = (purchasePrice * (1 - decreasePercentage/100)).toFixed(2);
+        
+        var increaseProfit = (increasePrice * totalShares).toFixed(2);
+        var decreaseLoss = (decreasePrice * totalShares).toFixed(2);
+        
+        var netProfitLoss = (increaseProfit - decreaseLoss).toFixed(2);
+        var netProfitLossHalf = (netProfitLoss / 2).toFixed(2);
+        
+        var profitLossClass = netProfitLoss >= 0 ? "profit" : "loss";
+        var increasePercentageClass = "increase";
+        
+        table += "<tr><td class='" + increasePercentageClass + "'>" + increasePercentage + "%</td><td>" + increasePrice + "</td><td class='profit'>" + increaseProfit + "</td><td class='net-profit-loss'>" + netProfitLossHalf + "</td><td class='loss'>" + decreasePercentage + "%</td><td>" + decreasePrice + "</td><td class='loss'>" + decreaseLoss + "</td></tr>";
+    }
+    table += "</table>";
+    
+    document.getElementById("results").innerHTML = table;
+    
+    // حساب العمولة والقيمة المضافة للعمولة
+    var commissionRate = 0.00155;
+    var commission = (purchasePrice * totalShares * commissionRate).toFixed(2);
+    var commissionVAT = (commission * 0.15).toFixed(2);
+    var totalWithCommission = (parseFloat(netProfitLossHalf) + parseFloat(commission) + parseFloat(commissionVAT)).toFixed(2);
+    var totalWithoutCommission = (totalShares * purchasePrice).toFixed(2);
+    
+        var commissionText = "العمولة: " + commission + " يال";
+    var commissionVATText = "القيمة المضافة للعمولة: " + commissionVAT + " ريال";
+    var totalWithoutCommissionText = "المجموع  بدون العمولة: " + totalWithoutCommission + " ريال";
+
+    var commissionInfo = "<div><p>" + commissionText + "</p><p>" + commissionVATText + "</p><p>" + totalWithoutCommissionText + "</p></div>";
+
+    document.getElementById("commissionInfo").innerHTML = commissionInfo;
+}
+
+// تحديث النتائج عند تغيير القيم
+function updateResults() {
+    calculateProfitLoss();
+}
+</script>
+
+</head>
+<body>
+<h2>حاسبة الأرباح والخسائر</h2>
+<p>عدد الأسهم: <input type="number" id="totalShares" oninput="updateResults()"></p>
+<p>سعر الشراء: <input type="number" id="purchasePrice" step="0.01" oninput="updateResults()"></p>
+<h3>النتائج:</h3>
+<div id="results"></div>
+<h3>معلومات العمولة:</h3>
+<div id="commissionInfo"></div>
+</body>
+</html>

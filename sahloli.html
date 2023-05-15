@@ -1,0 +1,164 @@
+
+<html dir="rtl">
+
+	<html dir="rtl">
+//mossaalsahlooli
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"> 
+	<meta name="keywords" content="Pivot points calculator, calculate pivot points, calculating pivot points, pivot calculator, pivot points, "> 
+	<meta name="description" content="Online pivot points calculator to find pivot points for forex and trading commodities and bonds. It can be calculated for any investment security that has a high, low and close price in any time period.">
+ 	<!-- main css -->
+<link rel="stylesheet" href="./style - Copy.css">
+		<!DOCTYPE html>
+		<html>//mossaalsahlooli
+		<!DOCTYPE html>
+		<html dir="rtl">
+
+		<head>
+			<title>حاسبة تجزئة سعر السهم</title>
+			<style><style><style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .result-title {
+      font-weight: bold;
+    }
+
+    .result-value {
+      font-size: 18px;
+      margin-top: 5px;
+      direction: rtl;
+      text-align: right;
+    }
+    html[dir="rtl"] .someClass {
+    text-align: right;
+    padding: 0 0 0 10px;
+}
+  </style>
+			<script>
+    function calculateSplitPrice() {
+      var currentPrice = parseFloat(document.getElementById("currentPrice").value);
+      var oldNominalValue = parseFloat(document.getElementById("oldNominalValue").value);
+      var newNominalValue = parseFloat(document.getElementById("newNominalValue").value);
+      var preSplitShares = parseFloat(document.getElementById("preSplitShares").value);
+
+      var splitRatio = oldNominalValue / newNominalValue;
+      var splitPrice = currentPrice / splitRatio;
+      var postSplitShares = preSplitShares * splitRatio;
+
+      document.getElementById("splitPrice").innerHTML = splitPrice.toFixed(2);
+      document.getElementById("splitRatio").innerHTML = splitRatio.toFixed(2);
+      document.getElementById("oldNominalValueResult").innerHTML = oldNominalValue.toFixed(2);
+      document.getElementById("newNominalValueResult").innerHTML = newNominalValue.toFixed(2);
+      document.getElementById("preSplitSharesResult").innerHTML = preSplitShares.toFixed(0);
+      document.getElementById("postSplitSharesResult").innerHTML = postSplitShares.toFixed(0);
+    }
+
+    function togglePreSplitShares() {
+      var preSplitSharesInput = document.getElementById("preSplitShares");
+      preSplitSharesInput.disabled = !preSplitSharesInput.disabled;
+    }
+  </script>//mossaalsahlooli
+		</head>
+		<body>
+		<div class="container">
+
+			</tr>
+			//mossaalsahlooli
+
+			<label for="currentPrice">السعر الحالي للسهم:</label>
+			<input type="text" id="currentPrice"><br><br>
+
+			<label for="oldNominalValue">القيمة الاسمية للسهم الحالية:</label>
+			<input type="text" id="oldNominalValue"><br><br>
+
+			<label for="newNominalValue">القيمة الاسمية للسهم بعد التجزئة:</label>
+			<input type="text" id="newNominalValue"><br><button onclick="togglePreSplitShares()">تفعيل/تعطيل  الأسهم قبل التجزئة</button><br>
+
+			<label for="preSplitShares">عدد الأسهم قبل التجزئة:</label>
+			<input type="text" id="preSplitShares"><br><br>
+
+			<button onclick="calculateSplitPrice()">احسب</button>
+
+			<br><br>
+
+
+			<table class="result">
+				<tr>
+					<td class="result-title">سعر السهم بعد التجزئة:</td>
+					<td class="result-value" id="splitPrice"></td>
+				</tr>
+				<tr>
+					<td class="result-title">نسبة التجزئة:</td>
+					<td class="result-value" id="splitRatio"></td>
+				</tr>
+				<tr>
+					<td class="result-title">القيمة الاسمية القديمة للسهم:</td>
+					<td class="result-value" id="oldNominalValueResult"></td>
+				</tr>
+				<tr>
+					<td class="result-title">القيمة الاسمية الجديدة للسهم:</td>
+					<td class="result-value" id="newNominalValueResult"></td>
+				</tr>
+				<tr>
+					<td class="result-title">عدد الأسهم قبل التجزئة:</td>
+					<td class="result-value" id="preSplitSharesResult"></td>
+				</tr>
+				<tr>
+					<td class="result-title">عدد الأسهم بعد التجزئة:</td>
+					<td class="result-value" id="postSplitSharesResult"></td>
+				</tr>
+			</table>
+		</div>
+		</body>
+		</html>
+		</body></html>//mossaalsahlooli//mossaalsahlooli//mossaalsahlooli//mossaalsahlooli//mossaalsahlooli//mossaalsahlooli
